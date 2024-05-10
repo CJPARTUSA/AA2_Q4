@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<head>
+    <title>New User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        form {
+            max-width: 500px; 
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        legend {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="submit"], input[type="reset"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <fieldset>
+            <legend>New User Registration</legend>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required><br>
+            
+            <label for="username">Desired Username:</label>
+            <input type="text" id="username" required><br>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="preferNotToSay">Prefer not to mention</option>
+            </select><br>
+            
+            <label for="password">Create Password:</label>
+            <input type="password" id="password" required><br>
+            
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" required><br>
+            
+            <label for="address">Home Address:</label>
+            <textarea id="address" rows="3" required></textarea><br>
+            
+            <label for="interest">Interests:</label>
+            <textarea id="interest" rows="3" required></textarea>
+        </fieldset>
+        
+        <input type="submit" value="Register">
+        <input type="reset" value="Clear">
+    </form>
+
+    <div class="output" id="userDetails"></div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            displayUserDetails();
+        });
+
+        document.getElementById('registrationForm').addEventListener('reset', function() {
+            document.getElementById('userDetails').innerHTML = '';
+        });
+
+        function displayUserDetails() {
+            const name = document.getElementById('name').value;
+            const username = document.getElementById('username').value;
+            const gender = document.getElementById('gender').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const interest = document.getElementById('interest').value;
+
+            const userDetails = `
+                <h2>User Details:</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Username:</strong> ${username}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Interests:</strong> ${interest}</p>
+            `;
+
+            document.getElementById('userDetails').innerHTML = userDetails;
+        }
+
+        const inputElements = document.querySelectorAll('input, textarea, select');
+        inputElements.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.style.borderColor = 'green';
+            });
+            input.addEventListener('blur', () => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = 'red';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
